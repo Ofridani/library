@@ -11,5 +11,6 @@ function Book(title, author, pages, read) {
     }
 }
 
-const b1 = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-console.log(b1.info());
+function addBookToLibrary(title, author, pages, read){
+    myLibrary.push(new Book(title, author, pages, read));
+}
