@@ -14,3 +14,7 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read){
     myLibrary.push(new Book(title, author, pages, read));
 }
+
+const bookTable = document.querySelector("table");
+const totalBooksElement = bookTable.querySelector("#totalBooks").nextSibling;
+const totalPagesElement = bookTable.querySelector("#totalPages").nextSibling;
