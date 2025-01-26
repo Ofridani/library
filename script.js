@@ -16,8 +16,8 @@ function addBookToLibrary(title, author, pages, read){
 }
 
 const bookTable = document.querySelector("table");
-const totalBooksElement = bookTable.querySelector("#totalBooks").nextSibling;
-const totalPagesElement = bookTable.querySelector("#totalPages").nextSibling;
+const totalBooksElement = bookTable.querySelector("#totalBooks + td")
+const totalPagesElement = bookTable.querySelector("#totalPages + td")
 
 function displayLibrary(){
     myLibrary.forEach(book => {
@@ -28,6 +28,8 @@ function displayLibrary(){
             row.appendChild(col);
         }
         bookTable.querySelector("tbody").appendChild(row);
+        totalBooksElement.textContent = parseInt(totalBooksElement.textContent)+1;
+        totalPagesElement.textContent = parseInt(totalPagesElement.textContent)+book.pages;
     });
 }
 
