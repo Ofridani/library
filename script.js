@@ -34,4 +34,6 @@ function displayLibrary(){
 }
 
 addBookToLibrary("Eragon", "Christopher Paolini", 532, true)
+addBookToLibrary("Eldest", "Christopher Paolini", 800, true)
+addBookToLibrary("Murtagh", "Christopher Paolini", 602, false)
 displayLibrary()
