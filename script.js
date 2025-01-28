@@ -5,10 +5,6 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-
-    // this.info = function(){
-    //     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "already read" : "not read yet"}`
-    // }
 }
 
 function addBookToLibrary(title, author, pages, read){
@@ -33,7 +29,26 @@ function displayLibrary(){
     });
 }
 
-addBookToLibrary("Eragon", "Christopher Paolini", 532, true)
-addBookToLibrary("Eldest", "Christopher Paolini", 800, true)
-addBookToLibrary("Murtagh", "Christopher Paolini", 602, false)
-displayLibrary()
+const openButton = document.querySelector("button.openModal");
+const closeButton = document.querySelector("button.closeModal");
+const modal = document.querySelector("#addBook");
+const form = document.querySelector("#bookForm");
+
+openButton.addEventListener("click", () => {
+    modal.showModal();
+})
+
+form.addEventListener("submit", (event) => {
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = parseInt(document.querySelector("#pages").value);
+    const read = document.querySelector('input[name="read"]:checked').value === "yes";
+    addBookToLibrary(title, author, pages, read);
+    displayLibrary();
+    modal.close();
+})
+
+addBookToLibrary("Eragon", "Christopher Paolini", 532, true);
+addBookToLibrary("Eldest", "Christopher Paolini", 800, true);
+addBookToLibrary("Murtagh", "Christopher Paolini", 602, false);
+displayLibrary();
