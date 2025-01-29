@@ -11,6 +11,10 @@ function addBookToLibrary(title, author, pages, read){
     myLibrary.push(new Book(title, author, pages, read));
 }
 
+function removeBookFromLibrary(key){
+    myLibrary.splice(key, 1);
+}
+
 const bookTable = document.querySelector("table");
 const bookTableBody = bookTable.querySelector("tbody");
 const totalBooksElement = bookTable.querySelector("#totalBooks + td");
@@ -27,6 +31,19 @@ function displayLibrary(){
             col.textContent = propertyName == "read" ? (book[propertyName] ? "Yes" : "No") : book[propertyName]; // if the property is "read" then write as "yes" and "no" instead of a boolean, else write the normal property
             row.appendChild(col);
         }
+
+        // Creating remove button for book in table
+        const col = document.createElement("td");
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.className = "removeBook";
+        removeButton.addEventListener("click", (event) => {
+            removeBookFromLibrary(removeButton.parentElement.dataset.key);
+            displayLibrary();
+        });
+        col.appendChild(removeButton);
+        row.appendChild(col);
+        
         bookTableBody.appendChild(row);
         totalBooksElement.textContent = parseInt(totalBooksElement.textContent)+1;
         totalPagesElement.textContent = parseInt(totalPagesElement.textContent)+book.pages;
