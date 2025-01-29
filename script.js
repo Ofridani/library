@@ -33,17 +33,29 @@ function displayLibrary(){
         }
 
         // Creating remove button for book in table
-        const col = document.createElement("td");
+        const colrem = document.createElement("td");
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
         removeButton.className = "removeBook";
         removeButton.addEventListener("click", (event) => {
-            removeBookFromLibrary(removeButton.parentElement.dataset.key);
+            removeBookFromLibrary(removeButton.parentElement.parentElement.dataset.key);
             displayLibrary();
         });
-        col.appendChild(removeButton);
-        row.appendChild(col);
-        
+        colrem.appendChild(removeButton);
+        row.appendChild(colrem);
+
+        const colread = document.createElement("td");
+        const readButton = document.createElement("button");
+        readButton.textContent = `Change to ${book.read ? '"Not Read"' : '"Read"'}`;
+        readButton.className = "removeBook";
+        readButton.addEventListener("click", (event) => {
+            const b = myLibrary[parseInt(readButton.parentElement.parentElement.dataset.key)];
+            b.read = !b.read;
+            displayLibrary();
+        });
+        colread.appendChild(readButton);
+        row.appendChild(colread);
+
         bookTableBody.appendChild(row);
         totalBooksElement.textContent = parseInt(totalBooksElement.textContent)+1;
         totalPagesElement.textContent = parseInt(totalPagesElement.textContent)+book.pages;
@@ -55,6 +67,8 @@ function clearLibraryDisplay(){
     totalBooksElement.textContent = "0";
     totalPagesElement.textContent = "0";
 }
+
+
 
 const openButton = document.querySelector("button.openModal");
 const closeButton = document.querySelector("button.closeModal");
