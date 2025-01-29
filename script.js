@@ -12,21 +12,31 @@ function addBookToLibrary(title, author, pages, read){
 }
 
 const bookTable = document.querySelector("table");
-const totalBooksElement = bookTable.querySelector("#totalBooks + td")
-const totalPagesElement = bookTable.querySelector("#totalPages + td")
+const bookTableBody = bookTable.querySelector("tbody");
+const totalBooksElement = bookTable.querySelector("#totalBooks + td");
+const totalPagesElement = bookTable.querySelector("#totalPages + td");
 
 function displayLibrary(){
-    myLibrary.forEach(book => {
-        const row = document.createElement("tr")
+    clearLibraryDisplay();
+    for (let i = 0; i < myLibrary.length; i++) {
+        const book = myLibrary[i];
+        const row = document.createElement(`tr`); // table row containing the book's information
+        row.dataset.key = i;
         for (const propertyName of Object.getOwnPropertyNames(book)) {
             const col = document.createElement("td");
-            col.textContent = propertyName == "read" ? (book[propertyName] ? "Yes" : "No"): book[propertyName];
+            col.textContent = propertyName == "read" ? (book[propertyName] ? "Yes" : "No") : book[propertyName]; // if the property is "read" then write as "yes" and "no" instead of a boolean, else write the normal property
             row.appendChild(col);
         }
-        bookTable.querySelector("tbody").appendChild(row);
+        bookTableBody.appendChild(row);
         totalBooksElement.textContent = parseInt(totalBooksElement.textContent)+1;
         totalPagesElement.textContent = parseInt(totalPagesElement.textContent)+book.pages;
-    });
+    }
+}
+
+function clearLibraryDisplay(){
+    bookTableBody.replaceChildren();
+    totalBooksElement.textContent = "0";
+    totalPagesElement.textContent = "0";
 }
 
 const openButton = document.querySelector("button.openModal");
